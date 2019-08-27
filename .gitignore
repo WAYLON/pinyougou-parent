@@ -1,0 +1,8 @@
+# Project exclude paths
+/pinyougou-common/target/
+/pinyougou-dao/target/
+/pinyougou-manager-web/target/
+/pinyougou-pojo/target/
+/pinyougou-sellergoods-interface/target/
+/pinyougou-sellergoods-service/target/
+/pinyougou-shop-web/target/
