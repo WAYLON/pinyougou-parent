@@ -57,5 +57,11 @@ public interface SellerService {
 	 * @return
 	 */
 	public PageResult findPage(TbSeller seller, int pageNum, int pageSize);
-	
+
+	/**
+	 * 更改状态
+	 * @param sellerId
+	 * @param status
+	 */
+	public void updateStatus(String sellerId,String status);
 }
