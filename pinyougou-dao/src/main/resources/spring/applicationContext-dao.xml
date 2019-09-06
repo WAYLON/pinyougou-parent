@@ -13,7 +13,7 @@
 	<!-- 加载配置文件 -->
 	<context:property-placeholder location="classpath*:properties/*.properties" />
 	<!-- 数据库连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean id="dataSource" class="com.pinyougou.common.DecryptDruidSource"
 		destroy-method="close">
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
@@ -21,6 +21,9 @@
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="maxActive" value="10" />
 		<property name="minIdle" value="5" />
+		<!-- 解密密码必须要配置的项 -->
+		<property name="filters" value="stat,config" />
+		<property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${jdbc.publickey}" />
 	</bean>
 	
 	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
