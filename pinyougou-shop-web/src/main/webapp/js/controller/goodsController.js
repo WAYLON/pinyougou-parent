@@ -84,7 +84,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 		});
 	};
 
-	$scope.entity={goods:{},goodsDesc:{itemImages:[]}};//定义页面实体结构
+	$scope.entity={goods:{},goodsDesc:{itemImages:[],specificationItems:[]}};//定义页面实体结构
 	//添加图片列表
 	$scope.add_image_entity=function(){
 		$scope.entity.goodsDesc.itemImages.push($scope.image_entity);
@@ -131,6 +131,54 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 				//扩展属性
 				$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.typeTemplate.customAttributeItems);
 			});
+		//读取规格
+        typeTemplateService.findSpecList(newValue).success(
+            function (response) {
+                $scope.specList=response;
+            });
 	});
 
-});	
+	$scope.updateSpecAttribute=function ($event,name,value) {
+		var object = $scope.searchObjectByKey($scope.entity.goodsDesc.specificationItems,'attributeName',name);
+		if(object!=null){
+			if($event.target.checked){
+				object.attributeValue.push(value);
+			}else {
+				//取消勾選
+				object.attributeValue.splice(object.attributeValue.indexOf(object,1));//移除选项
+				//如果选项都取消了，将此条记录移除
+				if(object.attributeValue.length==0){
+					$scope.entity.goodsDesc.specificationItems.splice(
+						$scope.entity.goodsDesc.specificationItems.indexOf(object),1);
+				}
+			}
+		}else {
+			$scope.entity.goodsDesc.specificationItems.push(
+				{"attributeName":name,"attributeValue":[value]});
+
+		}
+	}
+	//创建sku列表
+	$scope.createItemList=function () {
+		$scope.entity.itemList=[{spec:{},price:0,num:99999,status:'0',isDefault:0 }]//列表初始化
+		var items = $scope.entity.goodsDesc.specificationItems;
+		for(var i= 0;i<items.length;i++){
+			$scope.entity.itemList = addColumn($scope.entity.itemList,items[i].attributeName,items[i].attributeValue);
+		}
+	}
+
+	addColumn=function (list, columnName,columnValues) {
+		var newList=[];
+		for(var i=0;i<list.length;i++){
+			var oldRow=list[i];
+			for(var j=0;j<columnValues.length;j++){
+				//深克隆
+				var newRow=JSON.parse(JSON.stringify(oldRow));
+				newRow.spec[columnName]=columnValues[j];
+				newList.push(newRow);
+			}
+		}
+
+		return newList;
+	}
+});

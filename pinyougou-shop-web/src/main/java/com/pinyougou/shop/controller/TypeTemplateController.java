@@ -121,5 +121,14 @@ public class TypeTemplateController {
 	public List<Map> selectOptionList(){
 		return typeTemplateService.selectOptionList();
 	}
-	
+
+	/**
+	 * 获取规格列表
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("findSpecList")
+	public List<Map> findSpecList(Long id) {
+		return typeTemplateService.findSpecList(id);
+	}
 }

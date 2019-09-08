@@ -64,4 +64,10 @@ public interface TypeTemplateService {
 	 * 模板下拉框数据
 	 */
 	List<Map> selectOptionList();
+
+	/**
+	 * 查询规格列表
+	 * @return
+	 */
+	public List<Map> findSpecList(Long id);
 }
