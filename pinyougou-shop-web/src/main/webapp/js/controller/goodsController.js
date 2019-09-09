@@ -35,27 +35,38 @@ app.controller('goodsController' ,function($scope,$location,$controller,goodsSer
 				$scope.entity.goodsDesc.itemImages = JSON.parse($scope.entity.goodsDesc.itemImages);//商品图片
 				//显示扩展属性
 				$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.entity.goodsDesc.customAttributeItems);
+				//SKU列表规格列转换
+				for( var i=0;i<$scope.entity.itemList.length;i++ ){
+					$scope.entity.itemList[i].spec = JSON.parse( $scope.entity.itemList[i].spec);
+				}
 
 			}
 		);				
 	}
 	
-	//新增
-	$scope.add=function(){
+	//保存
+	$scope.save=function(){
+		//提取文本编辑器的值
 		$scope.entity.goodsDesc.introduction=editor.html();
-		goodsService.add($scope.entity).success(
+		var serviceObject;//服务层对象
+		if($scope.entity.goods.id!=null){//如果有ID
+			serviceObject=goodsService.update( $scope.entity ); //修改
+		}else{
+			serviceObject=goodsService.add( $scope.entity  );//增加
+		}
+		serviceObject.success(
 			function(response){
 				if(response.success){
-					alert("新增成功");
-					$scope.entity={};
-					editor.html("")//清空富文本编辑器
+					alert('保存成功');
+					location.href="goods.html";
 				}else{
 					alert(response.message);
 				}
-			});
+			}
+		);
 	}
-	
-	 
+
+
 	//批量删除 
 	$scope.dele=function(){			
 		//获取选中的复选框			
