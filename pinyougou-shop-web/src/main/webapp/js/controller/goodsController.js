@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller,goodsService,uploadService,itemCatService,typeTemplateService){
+app.controller('goodsController' ,function($scope,$location,$controller,goodsService,uploadService,itemCatService,typeTemplateService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -23,10 +23,19 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(){
+		var id = $location.search()['id'];
+		if(id==null){
+			return;
+		}
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				editor.html($scope.entity.goodsDesc.introduction);//商品介绍
+				$scope.entity.goodsDesc.itemImages = JSON.parse($scope.entity.goodsDesc.itemImages);//商品图片
+				//显示扩展属性
+				$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.entity.goodsDesc.customAttributeItems);
+
 			}
 		);				
 	}
@@ -129,7 +138,11 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 				//品牌列表类型转换
 				$scope.typeTemplate.brandIds=JSON.parse($scope.typeTemplate.brandIds);
 				//扩展属性
-				$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.typeTemplate.customAttributeItems);
+				if($location.search()['id']==null){
+					$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.typeTemplate.customAttributeItems);
+				}
+				//规格
+				$scope.entity.goodsDesc.specificationItems=JSON.parse($scope.entity.goodsDesc.specificationItems);
 			});
 		//读取规格
         typeTemplateService.findSpecList(newValue).success(
@@ -180,5 +193,32 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 		}
 
 		return newList;
+	}
+	$scope.status=['未审核','已审核','审核未通过','已关闭'];//商品状态
+
+	$scope.itemCatList=[];//商品分类列表
+	$scope.findItemCatList=function(){
+		itemCatService.findAll().success(
+			function(response){
+				for(var i=0;i<response.length;i++){
+					$scope.itemCatList[response[i].id]=response[i].name;
+				}
+			}
+		);
+	}
+
+	//根据规格名称和选项名称返回是否被勾选
+	$scope.checkAttributeValue=function(specName,optionName){
+		var items= $scope.entity.goodsDesc.specificationItems;
+		var object= $scope.searchObjectByKey(items,'attributeName',specName);
+		if(object==null){
+			return false;
+		}else{
+			if(object.attributeValue.indexOf(optionName)>=0){
+				return true;
+			}else{
+				return false;
+			}
+		}
 	}
 });
