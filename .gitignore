@@ -10,3 +10,13 @@
 /pinyougou-content-interface/target/
 /.gitignore
 /.idea
+/pinyougou-portal-web/pinyougou-portal-web.iml
+/pinyougou-common/pinyougou-common.iml
+/pinyougou-content-interface/pinyougou-content-interface.iml
+/pinyougou-content-service/pinyougou-content-service.iml
+/pinyougou-dao/pinyougou-dao.iml
+/pinyougou-manager-web/pinyougou-manager-web.iml
+/pinyougou-pojo/pinyougou-pojo.iml
+/pinyougou-sellergoods-interface/pinyougou-sellergoods-interface.iml
+/pinyougou-sellergoods-service/pinyougou-sellergoods-service.iml
+/pinyougou-shop-web/pinyougou-shop-web.iml

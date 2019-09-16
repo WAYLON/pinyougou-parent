@@ -22,7 +22,7 @@
      <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
    </bean>  
   
-   <bean id="JedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" 
+   <bean id="JedisConnectionFactory" class="com.pinyougou.redis.JedisPoolConfigDefinition"
        p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}" p:pool-config-ref="poolConfig"/>  
    
    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">  
