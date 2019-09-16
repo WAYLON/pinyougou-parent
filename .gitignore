@@ -6,5 +6,7 @@
 /pinyougou-sellergoods-interface/target/
 /pinyougou-sellergoods-service/target/
 /pinyougou-shop-web/target/
+/pinyougou-content-service/target/
+/pinyougou-content-interface/target/
 /.gitignore
 /.idea
