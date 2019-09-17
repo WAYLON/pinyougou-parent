@@ -3,6 +3,7 @@
 /pinyougou-dao/target/
 /pinyougou-manager-web/target/
 /pinyougou-pojo/target/
+/pinyougou-portal-web/target
 /pinyougou-sellergoods-interface/target/
 /pinyougou-sellergoods-service/target/
 /pinyougou-shop-web/target/
@@ -20,3 +21,4 @@
 /pinyougou-sellergoods-interface/pinyougou-sellergoods-interface.iml
 /pinyougou-sellergoods-service/pinyougou-sellergoods-service.iml
 /pinyougou-shop-web/pinyougou-shop-web.iml
+/pinyougou-solr-util/target/

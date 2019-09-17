@@ -6,9 +6,8 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
- 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
- 
+
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * @author wanglei
@@ -37,7 +36,7 @@ public class ThreeDESUtil {
         IvParameterSpec ips = new IvParameterSpec(iv.getBytes());
         cipher.init(Cipher.ENCRYPT_MODE, deskey, ips);
         byte[] encryptData = cipher.doFinal(data.getBytes());
-        return Base64.encode(encryptData);
+        return Base64.encodeBase64String(encryptData);
     }
  
     public static String decrypt(String data, String keystr, String iv) throws Exception {
@@ -48,7 +47,7 @@ public class ThreeDESUtil {
         Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
         IvParameterSpec ips = new IvParameterSpec(iv.getBytes());
         cipher.init(Cipher.DECRYPT_MODE, deskey, ips);
-        byte[] decryptData = cipher.doFinal(Base64.decode(data));
+        byte[] decryptData = cipher.doFinal(Base64.decodeBase64(data));
         return new String(decryptData, ENCODING);
     }
  
