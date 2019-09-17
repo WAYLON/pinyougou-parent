@@ -21,7 +21,7 @@ public class ItemSearchServiceImpl implements ItemSearchService {
     public Map search(Map searchMap) {
         Query query = new SimpleQuery("*:*");
         //添加查询条件
-        Criteria criteria = new Criteria("item_keywords").is(searchMap.get("item_keywords"));
+        Criteria criteria = new Criteria("item_keywords").is(searchMap.get("keywords"));
         query.addCriteria(criteria);
         Map map= new HashMap<>();
         ScoredPage<TbItem> page = solrTemplate.queryForPage(query, TbItem.class);
