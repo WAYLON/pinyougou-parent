@@ -2,8 +2,10 @@ package com.pinyougou.manager.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import com.pinyougou.page.service.ItemPageService;
 import com.pinyougou.pojo.TbItem;
 import com.pinyougou.search.service.ItemSearchService;
+import com.pinyougou.sellergoods.service.ItemService;
 import entity.Goods;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ public class GoodsController {
 	private GoodsService goodsService;
 	@Reference(timeout = 5000)
 	private ItemSearchService searchService;
+	@Reference(timeout = 40000)
+	private ItemPageService itemPageService;
 	
 	/**
 	 * 返回全部列表
@@ -125,4 +129,8 @@ public class GoodsController {
         }
     }
 
+	@RequestMapping("/genHtml")
+    public void genHtml(Long goodsId){
+		itemPageService.genItemHtml(goodsId);
+	}
 }
