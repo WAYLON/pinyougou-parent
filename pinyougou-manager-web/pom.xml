@@ -110,11 +110,12 @@
             <artifactId>activemq-client</artifactId>
             <version>5.13.4</version>
         </dependency>
-        <dependency>
+       <!--解耦springJMS
+       <dependency>
             <groupId>com.pinyougou</groupId>
             <artifactId>pinyougou-page-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.pinyougou</groupId>
             <artifactId>pinyougou-common</artifactId>
