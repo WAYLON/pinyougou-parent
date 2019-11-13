@@ -18,9 +18,10 @@ app.service('userService',function($http){
 	this.findOne=function(id){
 		return $http.get('../user/findOne.do?id='+id);
 	}
-	//增加 
-	this.add=function(entity){
-		return  $http.post('../user/add.do',entity );
+	//增加
+
+	this.add=function(entity,smscode){
+		return  $http.post('../user/add.do?smscode='+smscode,entity );
 	}
 	//修改 
 	this.update=function(entity){

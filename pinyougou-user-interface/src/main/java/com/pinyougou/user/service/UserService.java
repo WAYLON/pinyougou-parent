@@ -17,6 +17,13 @@ public interface UserService {
 	public void createSmsCode(String phone);
 
 	/**
+	 * 判断短信验证码是否存在
+	 * @param phone
+	 * @return
+	 */
+	public boolean  checkSmsCode(String phone,String code);
+
+	/**
 	 * 返回全部列表
 	 * @return
 	 */
