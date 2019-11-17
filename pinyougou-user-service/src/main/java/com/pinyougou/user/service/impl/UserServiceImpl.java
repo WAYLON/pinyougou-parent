@@ -1,8 +1,6 @@
 package com.pinyougou.user.service.impl;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -24,6 +22,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
 import javax.jms.*;
+import javax.swing.plaf.basic.BasicListUI;
 
 /**
  * 服务实现层
@@ -63,11 +62,13 @@ public class UserServiceImpl implements UserService {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				MapMessage mapMessage = session.createMapMessage();
-				mapMessage.setString("phoneNumbers", phone);//手机号
-				mapMessage.setString("templateId", template_code);//模板编号
-				mapMessage.setString("smsSign", sign_name);//签名
-				String params = '\"'+code+",1";
-				mapMessage.setString("param", params);//参数
+				mapMessage.setObject("phoneNumbers", phone);//手机号
+				mapMessage.setObject("templateId", template_code);//模板编号
+				mapMessage.setObject("smsSign", "三十慕课");//签名
+                List<String> params = new ArrayList<>();
+                params.add(code);
+                params.add("1");
+                mapMessage.setObject("param", params);//参数
 				return mapMessage;
 			}
 		});
