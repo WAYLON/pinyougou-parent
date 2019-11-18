@@ -70,5 +70,7 @@ public interface UserService {
 	 * @return
 	 */
 	public PageResult findPage(TbUser user, int pageNum, int pageSize);
-	
+
+    Boolean findByUserName(String name);
+
 }
