@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 				MapMessage mapMessage = session.createMapMessage();
 				mapMessage.setObject("phoneNumbers", phone);//手机号
 				mapMessage.setObject("templateId", template_code);//模板编号
-				mapMessage.setObject("smsSign", "三十慕课");//签名
+				mapMessage.setObject("smsSign", sign_name);//签名
                 List<String> params = new ArrayList<>();
                 params.add(code);
                 params.add("1");
