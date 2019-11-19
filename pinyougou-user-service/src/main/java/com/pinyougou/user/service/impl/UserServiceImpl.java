@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void createSmsCode(String phone){
 		//生成6位随机数
-		final String code =  (long) (Math.random()*1000000)+"";
+		final String code =  (long) ((Math.random() * 9 + 1) *100000)+"";
 		System.out.println("验证码："+code);
 		//存入缓存
 		redisTemplate.boundHashOps("smscode").put(phone, code);
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 				MapMessage mapMessage = session.createMapMessage();
 				mapMessage.setObject("phoneNumbers", phone);//手机号
 				mapMessage.setObject("templateId", template_code);//模板编号
-				mapMessage.setObject("smsSign", "三十慕课");//签名
+				mapMessage.setObject("smsSign", sign_name);//签名
                 List<String> params = new ArrayList<>();
                 params.add(code);
                 params.add("1");
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(TbUser user, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
@@ -204,6 +204,21 @@ public class UserServiceImpl implements UserService {
 		
 		Page<TbUser> page= (Page<TbUser>)userMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	/**
+	 * 查找
+	 */
+	@Override
+	public Boolean findByUserName(String name) {
+		TbUserExample example = new TbUserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUsernameEqualTo(name);
+		List<TbUser> tbUsers = userMapper.selectByExample(example);
+		if(tbUsers.size() == 0){
+			return false;
+		}
+		return true;
 	}
 	
 }

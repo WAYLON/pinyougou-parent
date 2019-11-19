@@ -71,7 +71,10 @@ public class UserController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbUser user,String smscode){
 		boolean checkSmsCode = userService.checkSmsCode(user.getPhone(), smscode);
-		if(checkSmsCode==false){
+		if(userService.findByUserName(user.getUsername())){
+			return new Result(false, "用户名重复！");
+		}
+		if(!checkSmsCode){
 			return new Result(false, "验证码输入错误！");
 		}
 		try {
