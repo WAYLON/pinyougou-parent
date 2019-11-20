@@ -1,4 +1,4 @@
-package com.pinyougou.pojogroup;
+package com.pinyougou.pojo.group;
 
 import com.pinyougou.pojo.TbSpecification;
 import com.pinyougou.pojo.TbSpecificationOption;

@@ -2,7 +2,7 @@ package com.pinyougou.manager.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.pinyougou.pojogroup.Specification;
+import com.pinyougou.pojo.group.Specification;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
