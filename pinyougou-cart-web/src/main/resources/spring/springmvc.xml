@@ -29,7 +29,7 @@
 
 	<!-- 引用dubbo 服务 -->
 	<dubbo:application name="pinyougou-cart-web" />
-	<dubbo:registry address="zookeeper://www.jstudy.top:2181"/>
+	<dubbo:registry address="zookeeper://47.98.184.17:2181"/>
 	<dubbo:annotation package="com.pinyougou.cart.controller" />  	
 
 </beans>

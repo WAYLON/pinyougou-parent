@@ -11,8 +11,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-@Service(timeout = 500000)
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+@Service(timeout = 5000)
 public class CartServiceImpl implements CartService {
 
 	@Autowired
@@ -33,15 +37,26 @@ public class CartServiceImpl implements CartService {
 		String sellerId = item.getSellerId();//商家ID
 
 		//3.根据商家ID在购物车列表中查询购物车对象
-		Cart cart = searchCartBySellerId(cartList,sellerId);
+		List<Cart> carts = cartList.stream()
+				.filter(cart1 -> cart1.getSellerId().equals(sellerId))
+				.collect(Collectors.toList());
+		Cart cart;
+		if (carts.size()>0){
+			cart = carts.get(0);
+		}else {
+			cart = null;
+		}
 
-		if(cart==null){//4.如果购物车列表中不存在该商家的购物车
-
+		//4.如果购物车列表中不存在该商家的购物车
+		if(cart==null){
 			//4.1 创建一个新的购物车对象
 			cart=new Cart();
-			cart.setSellerId(sellerId);//商家ID
-			cart.setSellerName(item.getSeller());//商家名称
-			List<TbOrderItem> orderItemList=new ArrayList();//创建购物车明细列表
+			//商家ID
+			cart.setSellerId(sellerId);
+			//商家名称
+			cart.setSellerName(item.getSeller());
+			//创建购物车明细列表
+			List<TbOrderItem> orderItemList = new ArrayList<>();
 			TbOrderItem orderItem = createOrderItem(item,num);
 			orderItemList.add(orderItem);
 			cart.setOrderItemList(orderItemList);
@@ -51,7 +66,16 @@ public class CartServiceImpl implements CartService {
 
 		}else{//5.如果购物车列表中存在该商家的购物车
 			// 判断该商品是否在该购物车的明细列表中存在
-			TbOrderItem orderItem = searchOrderItemByItemId(cart.getOrderItemList(),itemId);
+			List<TbOrderItem> TbOrderItems = cart.getOrderItemList()
+					.stream().filter(tbOrderItem -> tbOrderItem.getItemId().equals(itemId))
+					.collect(Collectors.toList());
+			TbOrderItem orderItem;
+			if (TbOrderItems.size()>0){
+				orderItem = TbOrderItems.get(0);
+			}else {
+				orderItem = null;
+			}
+
 			if(orderItem==null){
 				//5.1  如果不存在  ，创建新的购物车明细对象，并添加到该购物车的明细列表中
 				orderItem=createOrderItem(item,num);
@@ -71,40 +95,8 @@ public class CartServiceImpl implements CartService {
 					cartList.remove(cart);
 				}
 			}
-
 		}
-
 		return cartList;
-	}
-
-	/**
-	 * 根据商家ID在购物车列表中查询购物车对象
-	 * @param cartList
-	 * @param sellerId
-	 * @return
-	 */
-	private Cart searchCartBySellerId(List<Cart> cartList,String sellerId){
-		for(Cart cart:cartList){
-			if(cart.getSellerId().equals(sellerId)){
-				return cart;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * 根据skuID在购物车明细列表中查询购物车明细对象
-	 * @param orderItemList
-	 * @param itemId
-	 * @return
-	 */
-	public TbOrderItem searchOrderItemByItemId(List<TbOrderItem> orderItemList,Long itemId){
-		for(TbOrderItem orderItem:orderItemList){
-			if(orderItem.getItemId().longValue()==itemId.longValue()){
-				return orderItem;
-			}
-		}
-		return null;
 	}
 
 	/**

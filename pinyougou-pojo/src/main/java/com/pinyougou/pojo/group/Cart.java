@@ -5,6 +5,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+/**
+ * @author 80481
+ * 购物车对象
+ */
 @Data
 public class Cart implements Serializable {
 

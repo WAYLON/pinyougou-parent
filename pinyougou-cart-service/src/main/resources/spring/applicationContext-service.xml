@@ -10,8 +10,8 @@
 
     <dubbo:protocol name="dubbo" port="20887"></dubbo:protocol> 
     
-	<dubbo:application name="pinyougou-cart-service"/>  
-    <dubbo:registry address="zookeeper://www.jstudy.top:2181"/>
+	<dubbo:application name="pinyougou-cart-service"/>
+	<dubbo:registry address="zookeeper://47.98.184.17:2181"/>
     <dubbo:annotation package="com.pinyougou.cart.service.impl" />  
    
    
