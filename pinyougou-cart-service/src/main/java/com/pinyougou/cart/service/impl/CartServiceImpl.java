@@ -22,6 +22,9 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private TbItemMapper itemMapper;
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	@Override
 	public List<Cart> addGoodsToCartList(List<Cart> cartList, Long itemId, Integer num) {
 
@@ -118,9 +121,6 @@ public class CartServiceImpl implements CartService {
 		orderItem.setTotalFee(  new BigDecimal(item.getPrice().doubleValue()*num) );
 		return orderItem;
 	}
-
-	@Autowired
-	private RedisTemplate redisTemplate;
 
 	@Override
 	public List<Cart> findCartListFromRedis(String username) {

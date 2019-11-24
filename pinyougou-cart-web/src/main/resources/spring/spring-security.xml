@@ -8,7 +8,6 @@
 	<http pattern="/img/**" security="none"></http>
 	<http pattern="/js/**" security="none"></http>
 	<http pattern="/plugins/**" security="none"></http>
-    <http pattern="/cart/*.do" security="none"></http>
 	<http pattern="/cart.html" security="none"></http>
    
 	
@@ -66,8 +65,6 @@
 	<beans:bean id="userDetailsService" class="com.pinyougou.user.service.UserDetailServiceImpl"/>  
 	
 	<!-- 认证过滤器 结束 -->
-	
-	
 	<!-- 单点登出  开始  -->     
     <beans:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>    
     <!-- 经过此配置，当用户在地址栏输入本地工程 /logout/cas  -->      
