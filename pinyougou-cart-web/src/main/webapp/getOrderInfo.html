@@ -9,9 +9,14 @@
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-getOrderInfo.css" />
+	<script type="text/javascript" src="plugins/angularjs/angular.min.js">  </script>
+	<script type="text/javascript" src="js/base.js">  </script>
+	<script type="text/javascript" src="js/service/cartService.js">  </script>
+	<script type="text/javascript" src="js/controller/cartController.js">  </script>
+
 </head>
 
-<body>
+<body ng-app="pinyougou" ng-controller="cartController" ng-init="findAddressList();findCartList()">
 	<!--head-->
 	<div class="top">
 		<div class="py-container">
@@ -65,30 +70,16 @@
 					<div class="addressInfo">
 						<ul class="addr-detail">
 							<li class="addr-item">
-							
-							  <div>
-								<div class="con name selected"><a href="javascript:;" >张默<span title="点击取消选择">&nbsp;</a></div>
-								<div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span>
-									<span class="base">默认地址</span>
-									<span class="edittext"><a data-toggle="modal" data-target=".edit" data-keyboard="false" >编辑</a>&nbsp;&nbsp;<a href="javascript:;">删除</a></span>
+								<div ng-repeat="address in addressList" >
+									<div class="con name {{isSelectedAddress(address)?'selected':''}}" >
+										<a href="javascript:;" ng-click="selectAddress(address)">{{address.contact}}<span title="点击取消选择"/>&nbsp;</a>
+									</div>
+									<div class="con address"   >{{address.address}}<span>{{address.mobile}}</span>
+										<span class="base" ng-if="address.isDefault=='1'">默认地址</span>
+										<span class="edittext"><a data-toggle="modal" data-target=".edit" data-keyboard="false" >编辑</a>&nbsp;&nbsp;<a href="javascript:;">删除</a></span>
+									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="clearfix"></div>
-							  </div>
-							  <div>
-								<div class="con name"><a href="javascript:;">李煜<span title="点击取消选择">&nbsp;</a></div>
-								<div class="con address">李煜 北京市海淀区三环内 中关村软件园8号楼 <span>187****4201</span>
-								<span class="edittext"><a data-toggle="modal" data-target=".edit" data-keyboard="false" >编辑</a>&nbsp;&nbsp;<a href="javascript:;">删除</a></span>
-								</div>
-								<div class="clearfix"></div>
-							  </div>
-							  
-							  <div>
-								<div class="con name"><a href="javascript:;">王希<span title="点击取消选择">&nbsp;</a></div>
-								<div class="con address">王希 北京市海淀区三环内 中关村软件园6号楼  <span>156****5681</span>
-								<span class="edittext"><a data-toggle="modal" data-target=".edit" data-keyboard="false" >编辑</a>&nbsp;&nbsp;<a href="javascript:;">删除</a></span>
-								</div>
-								<div class="clearfix"></div>
-							  </div>
 							</li>
 							
 							
@@ -162,8 +153,8 @@
 					</div>
 					<div class="step-cont">
 						<ul class="payType">
-							<li class="selected">微信付款<span title="点击取消选择"></span></li>
-							<li>货到付款<span title="点击取消选择"></span></li>
+							<li class="selected" ng-click="selectPayType('1')">微信付款<span title="点击取消选择"></span></li>
+							<li ng-click="selectPayType('2')">货到付款<span title="点击取消选择"></span></li>
 						</ul>
 					</div>
 					<div class="hr"></div>
@@ -173,22 +164,20 @@
 					<div class="step-cont">
 						<ul class="send-detail">
 							<li>
-								
-								<div class="sendGoods">
-									
-									<ul class="yui3-g">
+								<div ng-repeat="cart in cartList">
+									<ul class="yui3-g" ng-repeat="orderItem in cart.orderItemList">
 										<li class="yui3-u-1-6">
-											<span><img src="img/goods.png"/></span>
+											<span><img src="{{orderItem.picPath}}"/></span>
 										</li>
 										<li class="yui3-u-7-12">
-											<div class="desc">Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列</div>
+											<div class="desc">{{orderItem.title}}</div>
 											<div class="seven">7天无理由退货</div>
 										</li>
 										<li class="yui3-u-1-12">
-											<div class="price">￥5399.00</div>
+											<div class="price">￥{{orderItem.price}}</div>
 										</li>
 										<li class="yui3-u-1-12">
-											<div class="num">X1</div>
+											<div class="num">X{{orderItem.num}}</div>
 										</li>
 										<li class="yui3-u-1-12">
 											<div class="exit">有货</div>
@@ -222,8 +211,8 @@
 		<div class="order-summary">
 			<div class="static fr">
 				<div class="list">
-					<span><i class="number">1</i>件商品，总商品金额</span>
-					<em class="allprice">¥5399.00</em>
+					<span><i class="number">{{totalValue.totalNum}}</i>件商品，总商品金额</span>
+					<em class="allprice">¥{{totalValue.totalMoney.toFixed(2)}}</em>
 				</div>
 				<div class="list">
 					<span>返现：</span>
@@ -236,8 +225,10 @@
 			</div>
 		</div>
 		<div class="clearfix trade">
-			<div class="fc-price">应付金额:　<span class="price">¥5399.00</span></div>
-			<div class="fc-receiverInfo">寄送至:北京市海淀区三环内 中关村软件园9号楼 收货人：某某某 159****3201</div>
+			<div class="fc-price">
+				应付金额:<span class="price">¥{{totalValue.totalMoney.toFixed(2)}}</span>
+			</div>
+			<div class="fc-receiverInfo">寄送至:{{address.address}} 收货人：{{address.contact}} {{address.mobile}}</div>
 		</div>
 		<div class="submit">
 			<a class="sui-btn btn-danger btn-xlarge" href="pay.html">提交订单</a>

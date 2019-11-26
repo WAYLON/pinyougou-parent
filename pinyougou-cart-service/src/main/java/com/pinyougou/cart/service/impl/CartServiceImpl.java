@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -136,7 +137,7 @@ public class CartServiceImpl implements CartService {
 	public void saveCartListToRedis(String username, List<Cart> cartList) {
 		System.out.println("向redis中存入购物车"+username);
 		redisTemplate.boundHashOps("cartList").put(username, cartList);
-
+		redisTemplate.expire("cartList",24, TimeUnit.HOURS);
 	}
 
 	@Override
