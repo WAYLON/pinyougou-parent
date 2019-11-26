@@ -1,14 +1,16 @@
 package com.pinyougou.cart.controller;
-import java.util.List;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.pinyougou.pojo.TbAddress;
 import com.pinyougou.user.service.AddressService;
+import entity.PageResult;
+import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.pinyougou.pojo.TbAddress;
-import entity.PageResult;
-import entity.Result;
+
+import java.util.List;
 /**
  * controller
  * @author Administrator
@@ -109,5 +111,11 @@ public class AddressController {
 	public PageResult search(@RequestBody TbAddress address, int page, int rows  ){
 		return addressService.findPage(address, page, rows);		
 	}
-	
+
+	@RequestMapping("/findListByLoginUser")
+	public List<TbAddress> findListByLoginUser(){
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		return addressService.findListByUserId(userId);
+	}
+
 }

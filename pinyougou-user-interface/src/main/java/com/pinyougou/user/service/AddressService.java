@@ -1,8 +1,8 @@
 package com.pinyougou.user.service;
-import java.util.List;
 import com.pinyougou.pojo.TbAddress;
-
 import entity.PageResult;
+
+import java.util.List;
 /**
  * 服务层接口
  * @author Administrator
@@ -57,5 +57,13 @@ public interface AddressService {
 	 * @return
 	 */
 	public PageResult findPage(TbAddress address, int pageNum, int pageSize);
-	
+
+	/**
+	 * 根据用户查询地址
+	 * @param userId
+	 * @return
+	 */
+	public List<TbAddress> findListByUserId(String userId );
+
+
 }
