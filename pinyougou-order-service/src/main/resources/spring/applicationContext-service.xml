@@ -13,6 +13,12 @@
 	<dubbo:application name="pinyougou-order-service"/>
     <dubbo:registry address="zookeeper://47.98.184.17:2181"/>
     <dubbo:annotation package="com.pinyougou.order.service.impl" />
-   
+
+	<bean id="idWorker" class="util.IdWorker">
+		<!-- 进程ID -->
+		<constructor-arg index="0" value="0"></constructor-arg>
+		<!-- 数据中心ID -->
+		<constructor-arg index="1" value="0"></constructor-arg>
+	</bean>
    
 </beans>

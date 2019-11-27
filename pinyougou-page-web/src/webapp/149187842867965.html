@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>产品详情页</title>
+    <link rel="icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="css/webbase.css"/>
+    <link rel="stylesheet" type="text/css" href="css/pages-item.css"/>
+    <link rel="stylesheet" type="text/css" href="css/pages-zoom.css"/>
+    <link rel="stylesheet" type="text/css" href="css/widget-cartPanelView.css"/>
+    <script type="text/javascript" src="angularjs/angular.min.js">  </script>
+    <script type="text/javascript" src="js/base.js">  </script>
+    <script type="text/javascript" src="js/controller/itemController.js">  </script>
+
+    <script>
+        //SKU商品列表
+        var skuList=[
+                    ];
+    </script>
+
+</head>
+
+<body ng-app="pinyougou" ng-controller="itemController" ng-init="num=1;loadSku()">
+<!--页面顶部 开始-->
+<div id="nav-bottom">
+    <!--顶部-->
+    <div class="nav-top">
+        <div class="top">
+            <div class="py-container">
+                <div class="shortcut">
+                    <ul class="fl">
+                        <li class="f-item">品优购欢迎您！</li>
+                        <li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html"
+                                                                                                 target="_blank">免费注册</a></span>
+                        </li>
+                    </ul>
+                    <ul class="fr">
+                        <li class="f-item">我的订单</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item"><a href="home.html" target="_blank">我的品优购</a></li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">品优购会员</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">企业采购</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">关注品优购</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item" id="service">
+                            <span>客户服务</span>
+                            <ul class="service">
+                                <li><a href="cooperation.html" target="_blank">合作招商</a></li>
+                                <li><a href="shoplogin.html" target="_blank">商家后台</a></li>
+                                <li><a href="cooperation.html" target="_blank">合作招商</a></li>
+                                <li><a href="#">商家后台</a></li>
+                            </ul>
+                        </li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">网站导航</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--头部-->
+        <div class="header">
+            <div class="py-container">
+                <div class="yui3-g Logo">
+                    <div class="yui3-u Left logoArea">
+                        <a class="logo-bd" title="品优购" href="JD-index.html" target="_blank"></a>
+                    </div>
+                    <div class="yui3-u Center searchArea">
+                        <div class="search">
+                            <form action="" class="sui-form form-inline">
+                                <!--searchAutoComplete-->
+                                <div class="input-append">
+                                    <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge"/>
+                                    <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hotwords">
+                            <ul>
+                                <li class="f-item">品优购首发</li>
+                                <li class="f-item">亿元优惠</li>
+                                <li class="f-item">9.9元团购</li>
+                                <li class="f-item">每满99减30</li>
+                                <li class="f-item">亿元优惠</li>
+                                <li class="f-item">9.9元团购</li>
+                                <li class="f-item">办公用品</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yui3-u Right shopArea">
+                        <div class="fr shopcar">
+                            <div class="show-shopcar" id="shopcar">
+                                <span class="car"></span>
+                                <a class="sui-btn btn-default btn-xlarge" href="cart.html" target="_blank">
+                                    <span>我的购物车</span>
+                                    <i class="shopnum">0</i>
+                                </a>
+                                <div class="clearfix shopcarlist" id="shopcarlist" style="display:none">
+                                    <p>"啊哦，你的购物车还没有商品哦！"</p>
+                                    <p>"啊哦，你的购物车还没有商品哦！"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="yui3-g NavList">
+                    <div class="yui3-u Left all-sort">
+                        <h4>全部商品分类</h4>
+                    </div>
+                    <div class="yui3-u Center navArea">
+                        <ul class="nav">
+                            <li class="f-item">服装城</li>
+                            <li class="f-item">美妆馆</li>
+                            <li class="f-item">品优超市</li>
+                            <li class="f-item">全球购</li>
+                            <li class="f-item">闪购</li>
+                            <li class="f-item">团购</li>
+                            <li class="f-item">有趣</li>
+                            <li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u Right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--页面顶部 结束-->
+FreeMarker template error (DEBUG mode; use RETHROW in production!):
+The following has evaluated to null or missing:
+==> goodsDesc.specificationItems  [in template "item.ftl" at line 44, column 28]
+
+----
+Tip: It's the step after the last dot that caused this error, not those before it.
+----
+Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
+
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: #assign specificationList = goodsDesc...  [in template "item.ftl" at line 44, column 1]
+----
+
+Java stack trace (for programmers):
+----
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:131)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:355)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:82)
+	at freemarker.core.BuiltInForString._eval(BuiltInForString.java:26)
+	at freemarker.core.Expression.eval(Expression.java:78)
+	at freemarker.core.Assignment.accept(Assignment.java:131)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.Environment.process(Environment.java:302)
+	at freemarker.template.Template.process(Template.java:325)
+	at com.pinyougou.page.service.impl.ItemPageServiceImpl.genItemHtml(ItemPageServiceImpl.java:83)
+	at com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)
+	at com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)
+	at com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)
+	at com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)
+	at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:70)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:91)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:113)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:84)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)
+	at com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)
+	at com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
