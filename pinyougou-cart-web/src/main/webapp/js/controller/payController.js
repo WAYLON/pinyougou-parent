@@ -1,9 +1,8 @@
 app.controller('payController' ,function($scope ,payService){
 	//本地生成二维码
-	$scope.createNative=function(money){
-		payService.createNative(money).success(
+	$scope.createNative=function(){
+		payService.createNative().success(
 			function(response){
-				debugger;
 				$scope.money=  (response.total_fee/100).toFixed(2) ;	//金额
 				$scope.out_trade_no= response.out_trade_no;//订单号
 				//二维码
@@ -28,7 +27,7 @@ app.controller('payController' ,function($scope ,payService){
 					location.href="paysuccess.html#?money="+$scope.money;
 				}else{
 					if(response.message=='二维码超时'){
-						$scope.createNative($scope.money);//重新生成二维码
+						$scope.createNative();//重新生成二维码
 					}else{
 						location.href="payfail.html";
 					}

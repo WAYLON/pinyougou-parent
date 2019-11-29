@@ -1,7 +1,7 @@
 app.service('payService', function ($http) {
     //本地支付
-    this.createNative = function (money) {
-        return $http.get('pay/createNative.do?money='+money);
+    this.createNative = function () {
+        return $http.get('pay/createNative.do');
     }
 
     //查询支付状态
