@@ -9,11 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>pinyougou-shop-web</artifactId>
+    <artifactId>pinyougou-seckill-service</artifactId>
     <packaging>war</packaging>
 
 
     <dependencies>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -69,9 +70,9 @@
             <artifactId>fastjson</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.javassist</groupId>
+            <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.23.1-GA</version>
+            <version>3.12.1.GA</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -82,29 +83,25 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>com.pinyougou</groupId>
-            <artifactId>pinyougou-sellergoods-interface</artifactId>
+            <artifactId>pinyougou-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.pinyougou</groupId>
+            <artifactId>pinyougou-seckill-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.pinyougou</groupId>
             <artifactId>pinyougou-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- 身份验证 -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-        </dependency>
+
 
     </dependencies>
-
 
     <build>
         <plugins>
@@ -114,13 +111,12 @@
                 <version>2.2</version>
                 <configuration>
                     <!-- 指定端口 -->
-                    <port>9102</port>
+                    <port>9009</port>
                     <!-- 请求路径 -->
                     <path>/</path>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 
 </project>
