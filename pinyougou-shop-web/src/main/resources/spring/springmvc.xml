@@ -25,7 +25,6 @@
 
 	<!-- 引用dubbo 服务 -->
 	<dubbo:application name="pinyougou-shop-web" />
-	<dubbo:registry address="zookeeper://47.98.184.17:2181"/>
 	<dubbo:annotation package="com.pinyougou.shop.controller" />
 	<!-- 配置多媒体解析器 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
