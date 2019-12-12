@@ -6,11 +6,13 @@
 ##启动顺序
 
  ###一、商家后台
+ 
 1.`pinyougou-sellergoods-service` _9001_
 
 2.`pinyougou-shop-web` _9102_
 
  ###二、运营商后台
+ 
 1.`pinyougou-sellergoods-service` _9001_
 
 2.`pinyougou-content-service` _9002_
@@ -18,6 +20,7 @@
 3.`pinyougou-manager-web` _9101_
 
  ###三、网站首页
+ 
 1.`pinyougou-content-service` _9002_
 
 2.`cn.waylon,sms` _9003_
@@ -25,16 +28,19 @@
 3.`pinyougou-portal-web` _9103_
 
  ###四、搜索频道
+ 
 1.`pinyougou-search-service` _9004_
 
 2.`pinyougou-search-web` _9104_
 
  ###五、商家首页
+ 
 1.`pinyougou-page-service` _9005_
 
 2.`pinyougou-page-web` _9105_
 
  ###六、用户中心
+ 
 1.`pinyougou-user-service` _9006_
 
 2.`pinyougou-pay-service` _9000_
@@ -44,6 +50,7 @@
 4.`pinyougou-user-web` _9106_
 
  ###七、购物车
+ 
 1.`pinyougou-user-service` _9006_
 
 2.`pinyougou-pay-service`  _9000_
@@ -55,6 +62,7 @@
 5.`pinyougou-cart-web`  _9107_
 
  ###八、秒杀
+ 
 1.`pinyougou-seckill-service` _9009_
 
 2.`pinyougou-pay-service` _9000_
