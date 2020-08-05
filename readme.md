@@ -23,7 +23,7 @@
  
 1.`pinyougou-content-service` _9002_
 
-2.`cn.waylon,sms` _9003_
+2.`cn.waylon.sms` _9003_
 
 3.`pinyougou-portal-web` _9103_
 
